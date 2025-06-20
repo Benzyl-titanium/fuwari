@@ -1,0 +1,60 @@
+---
+import LinkCard from "@components/LinkCard.astro";
+import Comments from "../components/Comments.astro";
+import friendsData from "../content/spec/friends.json";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+
+type Friend = {
+	name?: string;
+	url: string;
+	icon?: string;
+	desc?: string;
+	tags?: string[];
+};
+const friends = friendsData as Friend[];
+
+async function getFriendMeta(friend: Friend): Promise<Required<Friend>> {
+	let icon =
+		friend.icon ||
+		`https://www.google.com/s2/favicons?domain=${new URL(friend.url).hostname}&sz=64`;
+	let desc = friend.desc || "";
+	let name = friend.name || "";
+	let tags = friend.tags || [];
+	return { name, url: friend.url, icon, desc, tags };
+}
+
+const friendsWithMeta = await Promise.all(
+	friends.map(async (friend) => await getFriendMeta(friend)),
+);
+---
+<MainGridLayout title="友链" description="友情链接">
+	<div class="space-y-8">
+		<div class="card-base z-10 px-8 py-6 relative w-full">
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+				{friendsWithMeta.map(friend => (
+					<LinkCard name={friend.name ?? ""} url={friend.url} icon={friend.icon ?? ""} desc={friend.desc ?? ""} tags={friend.tags} />
+				))}
+			</div>
+		</div>
+		<div class="card-base z-10 px-8 py-6 relative w-full">
+			<Comments />
+		</div>
+	</div>
+</MainGridLayout>
+
+<style>
+.friends-bg {
+	background: linear-gradient(135deg, 
+		oklch(0.98 0.015 var(--hue)) 0%,
+		oklch(0.97 0.025 calc(var(--hue) + 30)) 50%,
+		oklch(0.98 0.015 calc(var(--hue) + 60)) 100%
+	);
+}
+:global(.dark) .friends-bg {
+	background: linear-gradient(135deg, 
+		oklch(0.2 0.015 var(--hue)) 0%,
+		oklch(0.22 0.025 calc(var(--hue) + 30)) 50%,
+		oklch(0.2 0.015 calc(var(--hue) + 60)) 100%
+	);
+}
+</style> 
