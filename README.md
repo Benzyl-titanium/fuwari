@@ -1,6 +1,6 @@
 # 🍥Fuwari
 
-基于 [Astro](https://astro.build) 开发的静态博客模板
+基于 [Astro](https://astro.build) 开发的静态博客模板  
 基于 [Fuwari](https://fuwari.vercel.app) 改的赤史博客
 
 ## ✨ 功能特性
@@ -16,6 +16,7 @@
 - [x] 友链
 - [x] 固定文章
 - [x] 烟花爆炸效果
+- [x] 404页面
 
 ## 👀 要求
 
