@@ -6,19 +6,30 @@ description: "Read more about Markdown features in Fuwari"
 image: ""
 tags: [Demo, Example, Markdown, Fuwari]
 category: "Examples"
-draft: true
+draft: false
+pinned: true
 ---
 
 ## GitHub Repository Cards
 
 You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API.
 
-::github{repo="Fabrizz/MMM-OnSpotify"}
+::github{repo="Benzyl-titanium/fuwari"}
 
 Create a GitHub repository card with the code `::github{repo="<owner>/<repo>"}`.
 
 ```markdown
-::github{repo="saicaca/fuwari"}
+::github{repo="Benzyl-titanium/fuwari"}
+```
+
+## Gitlab Repository Cards
+
+::gitlab{repo="BianTaiLAB/NPSdose"}
+
+Create a GitHub repository card with the code `::gitlab{repo="<owner>/<repo>"}`.
+
+```markdown
+::gitlab{repo="BianTaiLAB/NPSdose"}
 ```
 
 ## Admonitions
@@ -82,3 +93,44 @@ This is a note with a custom title.
 > [!TIP]
 > The GitHub syntax is also supported.
 ```
+
+### smilesDrawer
+
+```smiles
+C(C1=CC=CC=C1)[Ti](CC1=CC=CC=C1)(CC1=CC=CC=C1)CC1=CC=CC=C1
+```
+
+````
+```smiles
+C(C1=CC=CC=C1)[Ti](CC1=CC=CC=C1)(CC1=CC=CC=C1)CC1=CC=CC=C1
+```
+````
+
+<div class="smiles">C(C1=CC=CC=C1)[Ti](CC1=CC=CC=C1)(CC1=CC=CC=C1)CC1=CC=CC=C1</div>
+
+```html
+<div class="smiles">C(C1=CC=CC=C1)[Ti](CC1=CC=CC=C1)(CC1=CC=CC=C1)CC1=CC=CC=C1</div>
+```
+
+## size
+
+```js
+// public/js/chemdraw.js
+const options = { width: 150, height: 150 };
+```
+
+## add script
+
+```html
+<script>
+  if (window.renderSmiles) {
+    setTimeout(window.renderSmiles, 100);
+  }
+</script>
+```
+
+<script>
+  if (window.renderSmiles) {
+    setTimeout(window.renderSmiles, 100);
+  }
+</script>
