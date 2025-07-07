@@ -39,8 +39,8 @@ importers:
         specifier: ^1.2.3
         version: 1.2.3
       '@iconify-json/material-symbols':
-        specifier: ^1.2.21
-        version: 1.2.24
+        specifier: ^1.2.29
+        version: 1.2.29
       '@iconify-json/mdi':
         specifier: ^1.2.3
         version: 1.2.3
@@ -151,11 +151,11 @@ importers:
         specifier: ^2.16.0
         version: 2.16.0
       postcss-import:
-        specifier: ^16.1.0
-        version: 16.1.0(postcss@8.5.4)
+        specifier: ^16.1.1
+        version: 16.1.1(postcss@8.5.4)
       postcss-nesting:
-        specifier: ^13.0.1
-        version: 13.0.1(postcss@8.5.4)
+        specifier: ^13.0.2
+        version: 13.0.2(postcss@8.5.4)
 
 packages:
 
@@ -1050,8 +1050,8 @@ packages:
   '@iconify-json/fa6-solid@1.2.3':
     resolution: {integrity: sha512-C5o8YJF+ekrS4wRb/6/0SE2KjRyJlCg++IOVC/fineiRinITivsmzFRNW1MQX2xfDZ1T7bxeKxLN6lcaTG3jGA==}
 
-  '@iconify-json/material-symbols@1.2.24':
-    resolution: {integrity: sha512-SYEpI2LKwWE50D9SDmX4KvfX6cMOVb/AOtyiFWulshRoXbZMBxgBEOiR7vbGESnn46SI6miHuH7IbCiqb+1RBQ==}
+  '@iconify-json/material-symbols@1.2.29':
+    resolution: {integrity: sha512-UUSrsl0gHF0GjAB9eZOpXrj7/v55ayMzo3QnMwUqP/FSfSkITKLR7CsBmUIFS8eEj8eRTfBNWA1yiIJR6UOdWg==}
 
   '@iconify-json/mdi@1.2.3':
     resolution: {integrity: sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==}
@@ -3688,8 +3688,8 @@ packages:
     peerDependencies:
       postcss: ^8.0.0
 
-  postcss-import@16.1.0:
-    resolution: {integrity: sha512-7hsAZ4xGXl4MW+OKEWCnF6T5jqBw80/EE9aXg1r2yyn1RsVEU8EtKXbijEODa+rg7iih4bKf7vlvTGYR4CnPNg==}
+  postcss-import@16.1.1:
+    resolution: {integrity: sha512-2xVS1NCZAfjtVdvXiyegxzJ447GyqCeEI5V7ApgQVOWnros1p5lGNovJNapwPpMombyFBfqDwt7AD3n2l0KOfQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       postcss: ^8.0.0
@@ -3795,8 +3795,8 @@ packages:
     peerDependencies:
       postcss: ^8.2.14
 
-  postcss-nesting@13.0.1:
-    resolution: {integrity: sha512-VbqqHkOBOt4Uu3G8Dm8n6lU5+9cJFxiuty9+4rcoyRPO9zZS1JIs6td49VIoix3qYqELHlJIn46Oih9SAKo+yQ==}
+  postcss-nesting@13.0.2:
+    resolution: {integrity: sha512-1YCI290TX+VP0U/K/aFxzHzQWHWURL+CtHMSbex1lCdpXD1SoR2sYuxDu5aNI9lPoXpKTCggFZiDJbwylU0LEQ==}
     engines: {node: '>=18'}
     peerDependencies:
       postcss: ^8.4
@@ -6061,7 +6061,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/material-symbols@1.2.24':
+  '@iconify-json/material-symbols@1.2.29':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -9237,7 +9237,7 @@ snapshots:
       read-cache: 1.0.0
       resolve: 1.22.10
 
-  postcss-import@16.1.0(postcss@8.5.4):
+  postcss-import@16.1.1(postcss@8.5.4):
     dependencies:
       postcss: 8.5.4
       postcss-value-parser: 4.2.0
@@ -9339,7 +9339,7 @@ snapshots:
       postcss: 8.5.4
       postcss-selector-parser: 6.1.2
 
-  postcss-nesting@13.0.1(postcss@8.5.4):
+  postcss-nesting@13.0.2(postcss@8.5.4):
     dependencies:
       '@csstools/selector-resolve-nested': 3.1.0(postcss-selector-parser@7.1.0)
       '@csstools/selector-specificity': 5.0.0(postcss-selector-parser@7.1.0)
