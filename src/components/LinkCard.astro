@@ -19,56 +19,93 @@ let meta = {
 	image: "",
 };
 
-// SSR fetch meta info
-if (Astro.fetch) {
+try {
+	const res = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" } });
+	const html = await res.text();
+	const titleMatch = html.match(/<title>(.*?)<\/title>/i);
+	const descMatch = html.match(
+		/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["'][^>]*>/i,
+	);
+	const iconMatch = html.match(
+		/<link[^>]+rel=["']icon["'][^>]+href=["']([^"']+)["'][^>]*>/i,
+	);
+	const ogImgMatch = html.match(
+		/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["'][^>]*>/i,
+	);
+	meta.title = titleMatch ? titleMatch[1] : url;
+	meta.description = descMatch ? descMatch[1] : "";
+	meta.icon = iconMatch ? iconMatch[1] : "";
+	meta.image = ogImgMatch ? ogImgMatch[1] : "";
+	if (meta.icon && !meta.icon.startsWith("http")) {
+		const u = new URL(meta.icon, url);
+		meta.icon = u.href;
+	}
+	if (meta.image && !meta.image.startsWith("http")) {
+		const u = new URL(meta.image, url);
+		meta.image = u.href;
+	}
+} catch (e) {
+	// ignore
+}
+
+function getFavicon(url: string) {
 	try {
-		const res = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" } });
-		const html = await res.text();
-		const titleMatch = html.match(/<title>(.*?)<\/title>/i);
-		const descMatch = html.match(
-			/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["'][^>]*>/i,
-		);
-		const iconMatch = html.match(
-			/<link[^>]+rel=["']icon["'][^>]+href=["']([^"']+)["'][^>]*>/i,
-		);
-		const ogImgMatch = html.match(
-			/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["'][^>]*>/i,
-		);
-		meta.title = titleMatch ? titleMatch[1] : url;
-		meta.description = descMatch ? descMatch[1] : "";
-		meta.icon = iconMatch ? iconMatch[1] : "";
-		meta.image = ogImgMatch ? ogImgMatch[1] : "";
-		if (meta.icon && !meta.icon.startsWith("http")) {
-			const u = new URL(meta.icon, url);
-			meta.icon = u.href;
-		}
-		if (meta.image && !meta.image.startsWith("http")) {
-			const u = new URL(meta.image, url);
-			meta.image = u.href;
-		}
-	} catch (e) {
-		// ignore
+		const hostname = new URL(url).hostname;
+		return `https://www.google.com/s2/favicons?domain=${hostname}&sz=64`;
+	} catch {
+		return fallbackIcon;
 	}
 }
+const iconUrl =
+	icon && icon.trim() !== ""
+		? icon
+		: meta.icon && meta.icon.trim() !== ""
+			? meta.icon
+			: getFavicon(url);
 ---
-<a href={url} class="linkcard" target="_blank" rel="noopener noreferrer">
-  <div class="fuwari-card flex items-center gap-4 p-4 rounded-xl border bg-[oklch(0.98_0.02_var(--hue))] dark:bg-[oklch(0.22_0.02_var(--hue))] border-[oklch(0.85_0.04_var(--hue))] dark:border-[oklch(0.35_0.04_var(--hue))] hover:shadow-lg transition w-full h-[110px] box-border overflow-hidden">
-    <img src={icon} alt={name} class="w-14 h-14 rounded-full bg-white border border-[oklch(0.85_0.04_var(--hue))] dark:border-[oklch(0.35_0.04_var(--hue))] flex-shrink-0" loading="lazy" onerror={`this.onerror=null;this.src='${fallbackIcon}'`} />
-    <div class="flex-1 min-w-0 flex flex-col justify-center h-full">
-      <div class="font-bold text-lg text-[oklch(0.55_0.13_var(--hue))] dark:text-[oklch(0.85_0.13_var(--hue))] truncate">{name}</div>
-      <div class="text-[oklch(0.45_0.07_var(--hue))] dark:text-[oklch(0.75_0.07_var(--hue))] text-sm line-clamp-2 break-all truncate">{desc || url}</div>
-      {tags && tags.length > 0 && (
-        <div class="mt-2 flex flex-wrap gap-2">
-          {tags.map(tag => (
-            <span class="px-2 py-0.5 bg-[oklch(0.95_0.04_var(--hue))] dark:bg-[oklch(0.25_0.04_var(--hue))] text-xs rounded text-[oklch(0.55_0.13_var(--hue))] dark:text-[oklch(0.85_0.13_var(--hue))] border border-[oklch(0.85_0.04_var(--hue))] dark:border-[oklch(0.35_0.04_var(--hue))]">{tag}</span>
-          ))}
-        </div>
-      )}
+<a href={url} class="card-github linkcard" target="_blank" rel="noopener noreferrer">
+  <div class="gc-titlebar">
+    <div class="gc-titlebar-left">
+      <div class="gc-owner">
+        <div class="gc-avatar" style={`background-image:url('${iconUrl}');background-color:transparent;`}></div>
+        <div class="gc-user">{name}</div>
+      </div>
     </div>
+    <div class="github-logo"></div>
   </div>
+  <div class="gc-description">{desc}</div>
+  {tags && tags.length > 0 && (
+    <div class="gc-infobar">
+      {tags.map(tag => (
+        <span class="gc-language">
+          <svg class="gc-tag-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><title>tag-outline</title><path d="M21.41 11.58L12.41 2.58A2 2 0 0 0 11 2H4A2 2 0 0 0 2 4V11A2 2 0 0 0 2.59 12.42L11.59 21.42A2 2 0 0 0 13 22A2 2 0 0 0 14.41 21.41L21.41 14.41A2 2 0 0 0 22 13A2 2 0 0 0 21.41 11.58M13 20L4 11V4H11L20 13M6.5 5A1.5 1.5 0 1 1 5 6.5A1.5 1.5 0 0 1 6.5 5Z" /></svg>
+          {tag}
+        </span>
+      ))}
+    </div>
+  )}
 </a>
+<style is:global>
+.dark .card-github,
+.dark .card-github .gc-titlebar,
+.dark .card-github .gc-description,
+.dark .card-github .gc-infobar,
+.dark .card-github .gc-language,
+.dark .card-github .gc-user {
+  color: #fff !important;
+}
+</style>
 <style>
+@import "../styles/markdown-extend.styl";
 .linkcard { display: block; text-decoration: none; }
-.fuwari-card { box-shadow: 0 2px 8px 0 oklch(0.85_0.04_var(--hue)/0.06); }
-.fuwari-card:hover { box-shadow: 0 4px 16px 0 oklch(0.55_0.13_var(--hue)/0.13); }
+.gc-language {
+  font-weight: 400;
+}
+.gc-user {
+  transition: color 0.15s;
+  font-weight: 600;
+}
+.card-github.linkcard:hover .gc-user {
+  color: var(--primary) !important;
+}
 </style>
