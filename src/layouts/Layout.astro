@@ -166,6 +166,50 @@ const bannerOffset =
 		></canvas>
 		<script type="text/javascript" src="/js/anime.min.js"></script>
 		<script type="text/javascript" src="/js/fireworks.js"></script>
+
+		<script is:inline>
+		function createBackToTopForMobile() {
+			if (window.innerWidth >= 1024) return;
+			if (document.querySelector('.back-to-top')) return;
+			const wrapper = document.createElement('div');
+			wrapper.className = 'back-to-top';
+			const btn = document.createElement('button');
+			btn.className = 'btn-card';
+			btn.setAttribute('aria-label', 'Back to Top');
+			btn.innerHTML = `
+				<svg viewBox="0 0 24 24" fill="currentColor" width="2rem" height="2rem">
+					<path d="M12 8.4c-.23 0-.45.09-.62.26l-5.3 5.3a.875.875 0 1 0 1.24 1.24l4.68-4.68 4.68 4.68a.875.875 0 1 0 1.24-1.24l-5.3-5.3a.875.875 0 0 0-.62-.26z"/>
+				</svg>
+				`;
+			btn.onclick = function(e) {
+				e.preventDefault();
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+			};
+			wrapper.appendChild(btn);
+			document.body.appendChild(wrapper);
+			let lastScrollY = window.scrollY;
+			let isScrollingUp = false;
+			window.addEventListener('scroll', () => {
+				const currentScrollY = window.scrollY;
+				isScrollingUp = currentScrollY < lastScrollY && currentScrollY > 300;
+				if (isScrollingUp) {
+					wrapper.classList.add('visible');
+				} else {
+					wrapper.classList.remove('visible');
+				}
+				lastScrollY = currentScrollY;
+			});
+		}
+		window.addEventListener('DOMContentLoaded', createBackToTopForMobile);
+		window.addEventListener('resize', () => {
+			if (window.innerWidth >= 1024) {
+				const btn = document.querySelector('.back-to-top');
+				if (btn) btn.remove();
+			} else {
+				createBackToTopForMobile();
+			}
+		});
+		</script>
 	</body>
 </html>
 
