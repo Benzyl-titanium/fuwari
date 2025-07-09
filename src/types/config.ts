@@ -10,6 +10,7 @@ export type SiteConfig = {
 		hue: number;
 		fixed: boolean;
 	};
+	startDate: string;
 	banner: {
 		enable: boolean;
 		src: string;
