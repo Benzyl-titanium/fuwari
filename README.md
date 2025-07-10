@@ -15,7 +15,7 @@
 - [x] 文内目录
 - [x] 友链
 - [x] 固定文章
-- [x] 烟花爆炸效果
+- [x] 烟花爆炸效果（带开关
 - [x] 404 页面
 
 ## 👀 要求
@@ -64,10 +64,11 @@ deno run -A npm:create-fuwari@latest
 ---
 title: My First Blog Post
 published: 2023-09-09
+updated: 2024-11-29
 description: This is the first post of my new Astro blog.
 image: ./cover.jpg
 tags: [Foo, Bar]
-category: Front-end
+category: "Front-end"
 draft: false
 pinned: false
 lang: zh_CN # 仅当文章语言与 `config.ts` 中的网站语言不同时需要设置
@@ -78,6 +79,7 @@ lang: zh_CN # 仅当文章语言与 `config.ts` 中的网站语言不同时需�
 | ------------- | ------------------------------------------------------------------------------------ |
 | `title`       | 文章标题                                                                             |
 | `published`   | 发布日期                                                                             |
+| `updated`     | 更新日期                                                                             |
 | `description` | 文章描述                                                                             |
 | `image`       | 封面图片                                                                             |
 | `tags`        | 标签                                                                                 |

@@ -49,7 +49,7 @@ export const navBarConfig: NavBarConfig = {
 			url: "/friends/",
 		},
 		{
-			name: "GitHub repo",
+			name: "Repo",
 			url: "https://github.com/Benzyl-titanium/fuwari", // Internal links should not include the base path, as it is automatically added
 			external: true, // Show an external link icon and will open in a new tab
 		},

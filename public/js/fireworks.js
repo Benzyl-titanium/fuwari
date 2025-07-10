@@ -1,4 +1,10 @@
 function clickEffect() {
+	if (localStorage.getItem("fireworks-enabled") !== "true") {
+		window.__fireworks_inited = false;
+		document.getElementById("__fireworks_canvas")?.remove();
+		document.getElementById("__fireworks_pointer")?.remove();
+		return;
+	}
 	if (window.__fireworks_inited) {
 		return;
 	}

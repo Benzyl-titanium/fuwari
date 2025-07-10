@@ -4,7 +4,7 @@ published: 2023-10-01
 updated: 2024-11-29
 description: A simple example of a Markdown blog post.
 tags: [Markdown, Blogging, Demo]
-category: Examples
+category: "Examples"
 draft: false
 ---
 
