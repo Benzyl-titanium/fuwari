@@ -1,4 +1,5 @@
 ---
+import { giscusConfig } from "../config";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 
@@ -7,18 +8,24 @@ interface Props {
 }
 
 const className = Astro.props.class;
+const { repo, repoId, categoryId, lang } = giscusConfig;
 ---
 
 <div class:list={["card-base px-6 py-4", className]}>
-  <div class="giscus"></div>
+  <div class="giscus"
+    data-repo={repo}
+    data-repo-id={repoId}
+    data-category-id={categoryId}
+    data-lang={lang}
+  ></div>
 </div>
 
 <script>
   let giscusLoaded = false;
 
   const setGiscusTheme = () => {
-    const giscusFrame = document.querySelector('iframe.giscus-frame') as HTMLIFrameElement;
-    if (giscusFrame) {
+    const giscusFrame = document.querySelector('iframe.giscus-frame');
+    if (giscusFrame && giscusFrame instanceof HTMLIFrameElement) {
       giscusFrame.contentWindow?.postMessage(
         { giscus: { setConfig: { theme: document.documentElement.classList.contains('dark') ? 'dark_dimmed' : 'light' } } },
         'https://giscus.app'
@@ -35,19 +42,30 @@ const className = Astro.props.class;
 
     container.innerHTML = '';
 
+    // 通过 dataset 读取参数，确保 container 为 HTMLElement
+    let repo = '', repoId = '', categoryId = '', lang = '';
+    if (container instanceof HTMLElement) {
+      ({
+        repo = '',
+        repoId = '',
+        categoryId = '',
+        lang = ''
+      } = container.dataset);
+    }
+
     const script = document.createElement('script');
     script.src = 'https://giscus.app/client.js';
-    script.setAttribute('data-repo', 'Benzyl-titanium/Home');
-    script.setAttribute('data-repo-id', 'R_kgDOOrZ0pA');
+    script.setAttribute('data-repo', repo);
+    script.setAttribute('data-repo-id', repoId);
     script.setAttribute('data-category', 'General');
-    script.setAttribute('data-category-id', 'DIC_kwDOOrZ0pM4CrkrZ');
-    script.setAttribute('data-mapping', 'pathname');
+    script.setAttribute('data-category-id', categoryId);
+    script.setAttribute('data-mapping', 'title');
     script.setAttribute('data-strict', '0');
     script.setAttribute('data-reactions-enabled', '1');
     script.setAttribute('data-emit-metadata', '1');
     script.setAttribute('data-input-position', 'top');
     script.setAttribute('data-theme', document.documentElement.classList.contains('dark') ? 'dark_dimmed' : 'light');
-    script.setAttribute('data-lang', 'zh-CN');
+    script.setAttribute('data-lang', lang);
     script.setAttribute('crossorigin', 'anonymous');
     script.async = true;
 

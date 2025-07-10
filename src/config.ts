@@ -94,3 +94,11 @@ export const licenseConfig: LicenseConfig = {
 	name: "CC BY-NC-SA 4.0",
 	url: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
 };
+
+// https://giscus.app
+export const giscusConfig = {
+	repo: "Benzyl-titanium/fuwari",
+	repoId: "R_kgDOO_CfYQ",
+	categoryId: "DIC_kwDOO_CfYc4Csx0m",
+	lang: "zh-CN",
+};

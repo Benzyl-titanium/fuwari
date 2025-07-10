@@ -1,9 +1,9 @@
 [
 	{
-		"name": "Benzyl titanium's blog",
 		"url": "https://benzyl-titanium.pages.dev",
+		"name": "Benzyl titanium's blog",
 		"icon": "https://benzyl-titanium.pages.dev/favicon/favicon.png",
-		"tags": ["chem", "drug"],
-		"desc": "Benzyl titanium's blog"
+		"desc": "Benzyl titanium's blog",
+		"tags": ["chem", "drug"]
 	}
 ]
