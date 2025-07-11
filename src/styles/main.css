@@ -167,3 +167,7 @@
 .collapsed {
     height: var(--collapsedHeight);
 }
+
+#sidebar.hidden ~ main#swup-container {
+    grid-column: 1 / span 2 !important;
+}
