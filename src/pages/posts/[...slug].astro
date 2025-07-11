@@ -1,5 +1,6 @@
 ---
 import path from "node:path";
+import PageViews from "@components/PageViews.astro";
 import License from "@components/misc/License.astro";
 import Markdown from "@components/misc/Markdown.astro";
 import I18nKey from "@i18n/i18nKey";
@@ -27,6 +28,8 @@ const { entry } = Astro.props;
 const { Content, headings } = await entry.render();
 
 const { remarkPluginFrontmatter } = await entry.render();
+
+const pageUrl = new URL(Astro.url.pathname, Astro.url.origin).href;
 
 const jsonLd = {
 	"@context": "https://schema.org",
@@ -65,6 +68,12 @@ const jsonLd = {
                         <Icon name="material-symbols:schedule-outline-rounded"></Icon>
                     </div>
                     <div class="text-sm">{remarkPluginFrontmatter.minutes} {" " + i18n(I18nKey.minutesCount)}</div>
+                </div>
+                <div class="flex flex-row items-center">
+                    <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
+                        <Icon name="material-symbols:visibility"></Icon>
+                    </div>
+                    <div class="text-sm"><PageViews url={pageUrl}/></div>
                 </div>
             </div>
 

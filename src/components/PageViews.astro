@@ -1,0 +1,14 @@
+---
+export interface Props {
+	url: string;
+	language?: string;
+}
+const { url = "", language = "" } = Astro.props;
+const slug = url.split("/").filter(Boolean).pop();
+const counterImgUrl = `https://count.getloli.com/get/@${slug}?theme=sketch-1&padding=1`;
+---
+
+<div class="flex gap-1 opacity-80">
+  <img src={counterImgUrl} alt="浏览量" style="padding:1px;height:24px;" />
+  {language && <div class="text-sm">{language}</div>}
+</div>
