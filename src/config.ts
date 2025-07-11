@@ -17,12 +17,12 @@ export const siteConfig: SiteConfig = {
 	startDate: "2024-01-15", // 建站日期
 	banner: {
 		enable: true,
-		src: "assets/images/image.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-		position: "bottom", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
+		src: "https://readme-typing-svg.demolab.com?font=Fira+Code&size=2&pause=1000&color=E3769B&center=true&vCenter=true&random=true&width=60&height=70&lines=Welcome+to+Benzyl+titanium's+blog!", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+		position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
 		credit: {
-			enable: false, // Display the credit text of the banner image
-			text: "", // Credit text to be displayed
-			url: "", // (Optional) URL link to the original artwork or artist's page
+			enable: true, // Display the credit text of the banner image
+			text: "Readme Typing SVG", // Credit text to be displayed
+			url: "https://readme-typing-svg.demolab.com/demo/", // (Optional) URL link to the original artwork or artist's page
 		},
 	},
 	toc: {
