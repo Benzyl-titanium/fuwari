@@ -8,7 +8,30 @@ import MainGridLayout from "../layouts/MainGridLayout.astro";
             <div class="flex items-center justify-center space-x-4 mb-8">
                 <span class="text-6xl font-bold text-[var(--btn-content)]">4⌬4</span>
             </div>
-            <h1 class="text-2xl font-semibold text-[var(--btn-content)] mb-4">🍥访问的页面被吃掉了🍥</h1>
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold text-[var(--btn-content)] mb-4">🍥当前访问的URL被吃掉了🍥</h2>
+                <p id="current-url" class="text-black dark:text-white font-mono text-sm break-all max-w-full overflow-x-auto">
+                    {Astro.url.href}
+                </p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="/archive/" class="text-[var(--primary)] underline decoration-[var(--link-underline)] decoration-1 decoration-dashed underline-offset-4 hover:decoration-transparent hover:bg-[var(--btn-plain-bg-hover)] hover:border-b hover:border-b-[var(--link-hover)] hover:border-b-dashed transition-all">
+                    归档
+                </a>
+            </div>
         </div>
     </div>
 </MainGridLayout>
+
+<script>
+function updateCurrentUrl() {
+    const urlElement = document.getElementById('current-url');
+    if (urlElement) {
+        urlElement.textContent = window.location.href;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', updateCurrentUrl);
+
+window.addEventListener('popstate', updateCurrentUrl);
+</script>
