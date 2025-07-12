@@ -115,6 +115,18 @@ function loadButtonScript() {
 }
 
 loadButtonScript();
+
+function handleSidebarToggleBtnDisplay() {
+    const btn = document.getElementById("sidebar-toggle-btn");
+    if (!btn) return;
+    if (window.innerWidth < 1024) {
+        btn.style.display = "none";
+    } else {
+        btn.style.display = "";
+    }
+}
+window.addEventListener("DOMContentLoaded", handleSidebarToggleBtnDisplay);
+window.addEventListener("resize", handleSidebarToggleBtnDisplay);
 </script>
 
 {import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js')}}>
