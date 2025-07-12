@@ -4,6 +4,22 @@
 		"name": "Benzyl titanium's blog",
 		"icon": "https://benzyl-titanium.pages.dev/favicon/favicon.png",
 		"desc": "Benzyl titanium's blog",
-		"tags": ["chem", "drug"]
+		"tags": ["chem", "drug"],
+		"iconType": "fa6-solid:blog"
+	},
+	{
+		"url": "https://github.com/Benzyl-titanium",
+		"name": "Benzyl titanium's GitHub",
+		"icon": "https://avatars.githubusercontent.com/u/149853988?v=4",
+		"desc": "Benzyl titanium's GitHub",
+		"tags": ["chem", "drug"],
+		"iconType": "fa6-brands:github"
+	},
+	{
+		"url": "https://biantai.pages.dev",
+		"name": "Benzyl titanium's home",
+		"icon": "https://biantai.pages.dev/public/imgs/favicon.png",
+		"desc": "Benzyl titanium's home",
+		"iconType": "mdi:home"
 	}
 ]

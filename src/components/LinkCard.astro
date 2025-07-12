@@ -1,6 +1,5 @@
 ---
-import { onMount } from "astro/client";
-import { useState } from "preact/hooks";
+import { Icon } from "astro-icon/components";
 
 interface Props {
 	name: string;
@@ -8,8 +7,16 @@ interface Props {
 	icon?: string;
 	desc?: string;
 	tags?: string[];
+	iconType?: string;
 }
-const { name, url, icon, desc, tags } = Astro.props;
+const {
+	name,
+	url,
+	icon,
+	desc,
+	tags,
+	iconType = "fa6-brands:github",
+} = Astro.props;
 const fallbackIcon = "/imgs/benzene.png";
 
 let meta = {
@@ -62,6 +69,19 @@ const iconUrl =
 		: meta.icon && meta.icon.trim() !== ""
 			? meta.icon
 			: getFavicon(url);
+
+function getIconName(iconType: string): string {
+	switch (iconType) {
+		case "fa6-solid:blog":
+			return "fa6-solid:blog";
+		case "mdi:home":
+			return "mdi:home";
+		default:
+			return "fa6-brands:github";
+	}
+}
+
+const iconName = getIconName(iconType);
 ---
 <a href={url} class="card-github linkcard" target="_blank" rel="noopener noreferrer">
   <div class="gc-titlebar">
@@ -71,7 +91,9 @@ const iconUrl =
         <div class="gc-user">{name}</div>
       </div>
     </div>
-    <div class="github-logo"></div>
+    <div class="corner-icon">
+      <Icon name={iconName} class="corner-svg" />
+    </div>
   </div>
   <div class="gc-description">{desc}</div>
   {tags && tags.length > 0 && (
@@ -111,5 +133,24 @@ const iconUrl =
 .gc-tag-icon {
 margin-right: 6px;
 vertical-align: middle;
+}
+.corner-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--tw-prose-headings);
+  margin-top: -0.1rem;
+  transition: color 0.15s;
+}
+.corner-svg {
+  font-size: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: block;
+}
+.card-github.linkcard:hover .corner-icon {
+  color: var(--primary) !important;
 }
 </style>

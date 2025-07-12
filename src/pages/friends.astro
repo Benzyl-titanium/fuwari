@@ -10,17 +10,17 @@ type Friend = {
 	icon?: string;
 	desc?: string;
 	tags?: string[];
+	iconType?: string;
 };
 const friends = friendsData as Friend[];
 
 async function getFriendMeta(friend: Friend): Promise<Required<Friend>> {
-	let icon =
-		friend.icon ||
-		`https://www.google.com/s2/favicons?domain=${new URL(friend.url).hostname}&sz=64`;
+	let icon = friend.icon || "";
 	let desc = friend.desc || "";
 	let name = friend.name || "";
 	let tags = friend.tags || [];
-	return { name, url: friend.url, icon, desc, tags };
+	let iconType = friend.iconType || "fa6-brands:github";
+	return { name, url: friend.url, icon, desc, tags, iconType };
 }
 
 const friendsWithMeta = await Promise.all(
@@ -32,7 +32,7 @@ const friendsWithMeta = await Promise.all(
 		<div class="card-base z-10 px-8 py-6 relative w-full">
 			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				{friendsWithMeta.map(friend => (
-					<LinkCard name={friend.name ?? ""} url={friend.url} icon={friend.icon ?? ""} desc={friend.desc ?? ""} tags={friend.tags} />
+					<LinkCard name={friend.name ?? ""} url={friend.url} icon={friend.icon ?? ""} desc={friend.desc ?? ""} tags={friend.tags} iconType={friend.iconType} />
 				))}
 			</div>
 		</div>
