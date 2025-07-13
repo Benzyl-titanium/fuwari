@@ -125,8 +125,25 @@ function handleSidebarToggleBtnDisplay() {
         btn.style.display = "";
     }
 }
-window.addEventListener("DOMContentLoaded", handleSidebarToggleBtnDisplay);
-window.addEventListener("resize", handleSidebarToggleBtnDisplay);
+
+function handleDisplaySettingsBtnDisplay() {
+    const btn = document.getElementById("display-settings-switch");
+    if (!btn) return;
+    if (window.innerWidth < 1024) {
+        btn.style.display = "none";
+    } else {
+        btn.style.display = "";
+    }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    handleSidebarToggleBtnDisplay();
+    handleDisplaySettingsBtnDisplay();
+});
+window.addEventListener("resize", () => {
+    handleSidebarToggleBtnDisplay();
+    handleDisplaySettingsBtnDisplay();
+});
 </script>
 
 {import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js')}}>
