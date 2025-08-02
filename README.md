@@ -1,7 +1,7 @@
 # 🍥Fuwari
 
 基于 [Astro](https://astro.build) 开发的静态博客模板  
-基于 [Fuwari](https://fuwari.vercel.app) 改的赤史博客
+基于 [Fuwari](https://github.com/saicaca/fuwari) 改的赤史博客
 
 ## ✨ 功能特性
 
